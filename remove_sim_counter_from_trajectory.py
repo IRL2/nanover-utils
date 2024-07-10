@@ -38,7 +38,7 @@ def strip_simulation_counter_from_recording(recording_path_traj):
      '-stripped'.
     """
     INPATH = recording_path_traj
-    OUTPATH = INPATH + "-stripped.traj"
+    OUTPATH = INPATH.replace(".traj", "-stripped.traj")
 
     with open(INPATH, "rb") as infile, open(OUTPATH, "wb") as outfile:
         entries = iter_recording_entries(infile, GetFrameResponse)
