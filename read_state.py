@@ -132,7 +132,7 @@ def replace_and_copy_records(
             for key, value in change.updates.items()
         }
         change.removals = [
-            key.replace(to_replace, replace_by) for key, value in change.removes
+            key.replace(to_replace, replace_by) for key in change.removals
         ]
 
         write_entry(output_stream, timestamp, dictionary_change_to_state_update(change))
@@ -142,8 +142,7 @@ def replace_narupa(input_stream: BinaryIO, output_stream: BinaryIO):
     """
     Replace every occurrence of `narupa` to `nanover` in key names.
     """
-    header = copy_header(input_stream, output_stream)
-    replace_and_copy_records(input_stream, output_stream, header, "narupa", "nanover")
+    replace_and_copy_records(input_stream, output_stream, "narupa", "nanover")
 
 
 def command_line():
